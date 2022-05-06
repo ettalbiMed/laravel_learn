@@ -12,7 +12,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        User::create(array('name'=> 'mustapha', 'email'=> 'mustapha@free.fr', 'password'=> 'mustapha'));
+        User::create(array('name'=> 'mustapha', 'email'=> 'mustapha@free.fr', 'password'=> 'mustapha')); 
 
         
     }
