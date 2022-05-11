@@ -13,3 +13,7 @@
 
 Route::get('/', 'HomeController@home');
 Route::get('product', 'productController@list');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
