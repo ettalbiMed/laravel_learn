@@ -3,28 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Repositories\ProductRepository;
 
-class productController extends Controller
+class categoryController extends Controller
 {
         /**
      * Instantiate a new controller instance.
      *
      * @return void
      */
-    protected $productRepository;
+    protected $categoryRepository;
 
-    public function __construct(ProductRepository $productRepository)
+    public function __construct(ProductRepository $categoryRepository)
     {
-        $this->productRepository = $productRepository;
+        $this->categoryRepository = $categoryRepository;
         //$this->middleware('auth');
     }
 
     public function index() {
-        $products = $this->productRepository->all();
-        dd($products[0]->categories[0]->id);
+        $categories = $this->categoryRepository->all();
 
-        return view('home',$products);
+        return view('home',$categories);
     }
 
      /**
@@ -34,8 +32,8 @@ class productController extends Controller
      */
     public function add(Request $request)
     {
-        $fields = array("reference" => "vice 35 MM", "designation" => "un moteur de telechargement de materiels", "user_id" => 1);
-        $save = $this->productRepository->create($fields);
+        $fields = array("name" => "vice 35 MM", "user_id" => 1);
+        $save = $this->categoryRepository->create($fields);
         if($save)
             return $save;
 
@@ -54,9 +52,9 @@ class productController extends Controller
      */
     public function get($id)
     {
-        $product = $this->productRepository->find($id, ['id', 'reference'],array('id'=> 1, 'reference'=> "Gabrielle Rutherford DVM"));
-        dd($product);
-        return view('product',$product);
+        $category = $this->categoryRepository->find($id, ['id', 'name'],array('id'=> 1, 'name'=> "Gabrielle Rutherford DVM"));
+        dd($category);
+        return view('category',$category);
         
         //
     }
@@ -65,7 +63,7 @@ class productController extends Controller
     {
 
         //array('id'=> 1, 'reference'=> "Gabrielle Rutherford DVM")
-        $products = $this->productRepository->criteria(['id', 'reference'],[['id', '>', '0'],['reference', 'like', 'Gabrielle Rutherford DVM']]);
+        $categories = $this->category->criteria(['id', 'name'],[['id', '>', '0'],['name', 'like', 'Gabrielle Rutherford DVM']]);
         dd($products);
 
     }
@@ -78,8 +76,8 @@ class productController extends Controller
      */
     public function edit($id)
     {
-        $product = $this->productRepository->find($id, ['id', 'reference']);
-        return view('product',$product);
+        $category = $this->categoryRepository->find($id, ['id', 'name']);
+        return view('category',$category);
         //
     }
 
@@ -92,8 +90,8 @@ class productController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $fields = array("reference" => "vice 41 MM", "designation" => "un moteur de telechargement de materiels", "user_id" => 1);
-        $save = $this->productRepository->update($id, $fields);
+        $fields = array("name" => "vice 41 MM", "user_id" => 1);
+        $save = $this->categoryRepository->update($id, $fields);
         if($save)
             return $save;
 
@@ -109,7 +107,7 @@ class productController extends Controller
      */
     public function delete($id)
     {
-        $save = $this->productRepository->delete($id);
+        $save = $this->categoryRepository->delete($id);
         if($save)
             return $save;
 
