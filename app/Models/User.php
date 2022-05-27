@@ -29,11 +29,11 @@ class User extends Authenticatable
 
     public function products()
     {
-        return $this->hasMany('App\Product');
+        return $this->hasMany('App\Models\Product');
     }
 
     public function categories()
     {
-        return $this->hasMany('App\Category');
+        return $this->hasMany('App\Models\Category');
     }
 }
